@@ -10,10 +10,13 @@ dd/mm/2025
 
 ## Resumo
 
-Lista de parágrafos descrevendo sucintamente em que consistiu o trabalho.
+Neste trabalho, foi desenvolvido um programa em Python que soma todas as sequências de dígitos que encontra num texto, tendo por base algumas restrições. Sempre que a string "Off" seja encontrada em qualquer combinação de maiúsculas e minúsculas, esse comportamento de soma é desligado. Adicionalmente, sempre a string "On" seja encontrada em qualquer combinação de maiúsculas e minúsculas, esse comportamento de soma é novamente ligado. Por último, sempre que o carater "=" seja encontrado, o resultado da soma até ao momento é colocado na saída.
+
+O programa lê um texto de entrada (via stdin), que pode ser fornecido tanto manualmente pelo usuário, usando, para tal, o comando "python3 tpc.py", quanto a partir de um ficheiro de texto, usando então o comando "python3 tpc.py < texto.txt", por exemplo.
 
 ## Lista de Resultados
 
-Lista com apontadores para os ficheiros resultantes.
+- [tpc.py](./tpc.py) - Programa principal.
+- [texto.txt](./texto.txt) - Texto a ser lido pelo programa principal.
 
 ---
