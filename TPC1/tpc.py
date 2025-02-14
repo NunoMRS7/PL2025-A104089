@@ -29,3 +29,5 @@ for linha in sys.stdin:
                 i += 1
         else:
             i += 1
+            
+print(soma)
