@@ -1,5 +1,9 @@
 import sys
 import re
+import locale
+
+locale.setlocale(locale.LC_ALL, 'pt_PT.UTF-8')
+
 
 regexCompositor = r';\d\d\d\d;[^;]+;([^;]+);[^;]+;'
 regexPeriodo    = r';\d\d\d\d;([^;]+);[^;]+;[^;]+;'
@@ -38,7 +42,7 @@ for linha in sys.stdin:
 
 
 listaCompositores = list(setCompositores)
-listaCompositores.sort()
+listaCompositores.sort(key=locale.strxfrm)
 print("======== Lista ordenada de compositores musicais ========")
 for c in listaCompositores:
     print(c)
@@ -49,7 +53,7 @@ for p, n in dictPeriodosQuantidades.items():
 
 print("\n\n\n======== Títulos de obras por período ========")
 for p, l in dictPeriodosTitulos.items():
-    l.sort()
+    l.sort(key=locale.strxfrm)
     print(f"{p}:")
     for t in l:
         print("\t",t)
