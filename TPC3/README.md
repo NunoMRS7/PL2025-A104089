@@ -1,6 +1,6 @@
 # Título
 
-dd/mm/2025
+22/02/2025
 
 ## Autor
 **Nome:** Nuno Miguel Ribeiro da Silva  
@@ -10,10 +10,11 @@ dd/mm/2025
 
 ## Resumo
 
-Lista de parágrafos descrevendo sucintamente em que consistiu o trabalho.
+Neste trabalho, foi desenvolvido um programa em Python que, tendo por base expressões regulares, processa um texto com sintaxe MarkDown e imprime no ecrã o mesmo texto mas agora com sintaxe HTML. Para isso o programa tem a capacidade de fazer conversões das sintaxes relativas a cabeçalhos, negrito, itálico, listas numeradas, links e imagens.
 
 ## Lista de Resultados
 
-Lista com apontadores para os ficheiros resultantes.
+- [tpc.py](./tpc.py) - Programa principal.
+- [texto.txt](./textoA.txt) - Texto com sintaxe MarkDown a ser lido pelo programa principal.
 
 ---

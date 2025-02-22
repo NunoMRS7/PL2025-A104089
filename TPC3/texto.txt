@@ -1,0 +1,13 @@
+# Exemplo
+## Exemplo 2
+### Exemplo 3
+Este é um **exemplo** ...
+**Este é um exemplo 2 ...**
+Este é um *exemplo* ...
+*Este é um exemplo 2 ...*
+1. Primeiro item
+2. Segundo item
+3. Terceiro item
+Como pode ser consultado em [página da UC](http://www.uc.pt)
+1. Lista com um só elemento
+Como se vê na imagem seguinte: ![imagem dum coelho](http://www.coellho.com) ...
