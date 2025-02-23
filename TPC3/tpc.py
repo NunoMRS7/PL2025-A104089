@@ -2,37 +2,42 @@ import sys
 import re
 
 regexCabecalho = re.compile(r'^(#{1,3})\s*(.+)')
-regexBold = re.compile(r'(\*\*)([^\*]*)(\1)')
-regexItalic = re.compile(r'(\*)([^\*]*)(\1)')
+regexBold = re.compile(r'(\*\*)([^\*\*]+)(\1)')
+regexItalic = re.compile(r'(\*)([^\*]+)(\1)')
 regexLista = re.compile(r'\d\.\s+(.*)')
 regexImagem = re.compile(r'!\[([^\]]*)\]\(([^\)]+)\)')
 regexLink = re.compile(r'\[([^\]]*)\]\(([^\)]+)\)')
 
-linhaAnteriorEraLista = "OFF"
+linhaAnteriorEraLista = False
+
+linhaOutput = ""
 
 for linha in sys.stdin:
-    if regexLista.search(linha):
-        if linhaAnteriorEraLista == "ON": # verificar se a linha atual não é a primeira linha da lista
-            print(regexLista.sub(r'<li>\1</li>', linha), end="")
-        elif linhaAnteriorEraLista == "OFF": # verificar se a linha atual é a primeira linha da lista
-            print("<ol>")
-            print(regexLista.sub(r'<li>\1</li>', linha), end="")
-        linhaAnteriorEraLista = "ON" # atualizar linhaAnteriorEraLista para ON para a próxima leitura
-    else:
-        if linhaAnteriorEraLista == "ON": # verificar se a linha atual procede uma linha que pertencia a uma lista
-            print("</ol>")
-            linhaAnteriorEraLista = "OFF" # atualizar linhaAnteriorEraLista para OFF para a próxima leitura
+    
+    linhaOutput = linha
 
-        if res := regexCabecalho.search(linha):
+    if regexLista.search(linhaOutput):
+        if not linhaAnteriorEraLista: # verificar se a linha atual é a primeira linha da lista
+            print("<ol>")
+        linhaOutput = regexLista.sub(r'<li>\1</li>', linhaOutput)
+        linhaAnteriorEraLista = True # atualizar linhaAnteriorEraLista para ON para a próxima leitura
+    else:
+        if linhaAnteriorEraLista: # verificar se a linha atual procede uma linha que pertencia a uma lista
+            print("</ol>")
+            linhaAnteriorEraLista = False # atualizar linhaAnteriorEraLista para OFF para a próxima leitura
+
+        if res := regexCabecalho.search(linhaOutput):
             nivelCabecalho = len(res.group(1))
-            print(regexCabecalho.sub(lambda m: f'<h{nivelCabecalho}>{m.group(2)}</h{nivelCabecalho}>', linha), end="")
-        elif regexBold.search(linha):
-            print(regexBold.sub(r'<b>\2</b>', linha), end="")
-        elif regexItalic.search(linha):
-            print(regexItalic.sub(r'<i>\2</i>', linha), end="")
-        elif regexImagem.search(linha):
-            print(regexImagem.sub(r'<img src="\2" alt="\1"/>', linha), end="")
-        elif regexLink.search(linha):
-            print(regexLink.sub(r'<a href="\2">\1</a>', linha), end="")
+            linhaOutput = regexCabecalho.sub(lambda m: f'<h{nivelCabecalho}>{m.group(2)}</h{nivelCabecalho}>', linhaOutput)
+        if regexBold.search(linhaOutput):
+            linhaOutput = regexBold.sub(r'<b>\2</b>', linhaOutput)
+        if regexItalic.search(linhaOutput):
+            linhaOutput = regexItalic.sub(r'<i>\2</i>', linhaOutput)
+        if regexImagem.search(linhaOutput):
+            linhaOutput = regexImagem.sub(r'<img src="\2" alt="\1"/>', linhaOutput)
+        if regexLink.search(linhaOutput):
+            linhaOutput = regexLink.sub(r'<a href="\2">\1</a>', linhaOutput)
+    
+    print(linhaOutput, end="")
 
 print("")
