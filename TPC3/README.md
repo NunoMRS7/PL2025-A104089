@@ -1,6 +1,6 @@
 # Título
 
-22/02/2025
+21/02/2025
 
 ## Autor
 **Nome:** Nuno Miguel Ribeiro da Silva  
@@ -15,6 +15,6 @@ Neste trabalho, foi desenvolvido um programa em Python que, tendo por base expre
 ## Lista de Resultados
 
 - [tpc.py](./tpc.py) - Programa principal.
-- [texto.txt](./textoA.txt) - Texto com sintaxe MarkDown a ser lido pelo programa principal.
+- [texto.txt](./texto.txt) - Texto com sintaxe MarkDown a ser lido pelo programa principal.
 
 ---
