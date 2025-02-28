@@ -10,7 +10,7 @@
 
 ## Resumo
 
-Neste trabalho, foi desenvolvido um analisador léxico em Python para uma linguagem de query, sendo este, por isso, um programa que faz uso de expressões regulares. Este programa segue um modelo de verificação por linha de todos os _matches_ com uma determinada expressão regular, passando o conteudo capturado num deles para uma lista em cada elemento da mesma é um par entre o conteudo capturado num _match_ e o seu tipo (e.g. 'SIMBOL', 'NUMBER', 'VARIABLE', 'STRING', etc.).
+Neste trabalho, foi desenvolvido um analisador léxico em Python para uma linguagem de query. Utilizando uma robusta expressão regular, o programa identifica e classifica diferentes tipos de tokens num texto, como comentários, strings, tags, variáveis, números, palavras-chave, entre outros, imprimindo no ecrã, por cada token capturado, um tuplo com a seguinte estrutura (tipo_do_token, valor_do_token, número_da_linha, posição_do_token).
 
 ## Lista de Resultados
 
