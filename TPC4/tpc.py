@@ -70,12 +70,10 @@ def tokenize(content):
 
 
 
-linhas = []
+conteudo = ""
 
 for linha in sys.stdin:
-    linhas.append(linha)
-
-conteudo = "".join(linhas)
+    conteudo += linha
 
 for token in tokenize(conteudo):
     print(token)
