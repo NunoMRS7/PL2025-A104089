@@ -1,6 +1,6 @@
-# Título
+# TPC5 - Máquina de Vending
 
-dd/mm/2025
+14/03/2025
 
 ## Autor
 **Nome:** Nuno Miguel Ribeiro da Silva  
@@ -10,10 +10,11 @@ dd/mm/2025
 
 ## Resumo
 
-Lista de parágrafos descrevendo sucintamente em que consistiu o trabalho.
+Este trabalho consiste na implementação de um simulador de máquina de vending em Python. O programa mantém um stock de produtos armazenado num ficheiro JSON, permitindo listar produtos, inserir moedas, selecionar produtos e devolver o respetivo troco. Neste caso, a interação com o utilizador segue um conjunto de comandos predefinidos ('LISTAR', 'MOEDA', 'SELECIONAR', 'SAIR'). O estado do stock é atualizado no final da execução de forma a garantir a persistência dos dados.
 
 ## Lista de Resultados
 
-Lista com apontadores para os ficheiros resultantes.
+- [tpc.py](./tpc.py) - Programa principal.
+- [stock.json](./stock.json) - Ficheiro com o stock de produtos da máquina de vending.
 
 ---

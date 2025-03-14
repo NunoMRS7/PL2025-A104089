@@ -50,12 +50,9 @@ def t_COMPRA_QUANTIDADE(t):
         t.value = int(value[:-1])
     return t
 
-def t_COMPRA_newline(t):
-    r'\n+'
-    t.lexer.begin('INITIAL')
-
 def t_ANY_newline(t):
     r'\n+'
+    t.lexer.begin('INITIAL')
     t.lexer.lineno += len(t.value)
 
 def t_ANY_error(t):
@@ -118,8 +115,10 @@ def troco_to_string(saldo):
     str_list = [f"{value}x {key}" for key, value in troco.items() if value > 0]
     if len(str_list) > 1:
         res = ", ".join(str_list[:-1]) + " e " + str_list[-1]
-    else:
+    elif len(str_list) == 1:
         res = str_list[0]
+    else:
+        res = "0c"
 
     return res
 
@@ -161,20 +160,23 @@ def main():
             for item in stock:
                 print(item['cod'], " | ", item['nome'], " |      ", item['quant'], "      | ", item['preco'])
         elif lista_tokens[0].type == 'SELECIONAR':
-            cod = lista_tokens[1].value
-            p = produto(cod, stock)
-            if p is None:
-                print("maq: Produto não existe")
-            elif p['quant'] == 0:
-                print("maq: Produto esgotado")
-            elif int(p['preco'] * 100) > saldo:
-                print("Saldo insufuciente para satisfazer o seu pedido")
-                print(f"maq: Saldo = {saldo_to_string(saldo)}; Pedido = {saldo_to_string(int(p['preco'] * 100))}")
+            if len(lista_tokens) != 2:
+                print("maq: Indique o código do produto")
             else:
-                print(f"maq: Pode retirar o produto dispensado \"{p['nome']}\"")
-                p['quant'] -= 1
-                saldo -= int(p['preco'] * 100)
-                print(f"maq: Saldo = {saldo_to_string(saldo)}")
+                cod = lista_tokens[1].value
+                p = produto(cod, stock)
+                if p is None:
+                    print("maq: Produto não existe")
+                elif p['quant'] == 0:
+                    print("maq: Produto esgotado")
+                elif int(p['preco'] * 100) > saldo:
+                    print("maq: Saldo insufuciente para satisfazer o seu pedido")
+                    print(f"maq: Saldo = {saldo_to_string(saldo)}; Pedido = {saldo_to_string(int(p['preco'] * 100))}")
+                else:
+                    print(f"maq: Pode retirar o produto dispensado \"{p['nome']}\"")
+                    p['quant'] -= 1
+                    saldo -= int(p['preco'] * 100)
+                    print(f"maq: Saldo = {saldo_to_string(saldo)}")
         elif lista_tokens[0].type == 'MOEDA':
             for token in lista_tokens[1:]:
                 saldo += token.value
