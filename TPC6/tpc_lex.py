@@ -5,7 +5,9 @@ tokens = (
     'SUB',
     'MUL',
     'DIV',
-    'NUM'
+    'NUM',
+    'PA',
+    'PF'
 )
 
 t_ADD = r'\+'
@@ -13,6 +15,8 @@ t_SUB = r'-'
 t_MUL = r'\*'
 t_DIV = r'\/'
 t_NUM = r'\d+'
+t_PA = r'\('
+t_PF = r'\)'
 
 t_ignore = ' \t\n'
 

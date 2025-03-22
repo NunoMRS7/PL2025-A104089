@@ -45,6 +45,12 @@ def p_FATOR(p):
     """
     p[0] = p[1]
 
+def p_PARENTESES(p):
+    """
+    Fator : PA Exp PF
+    """
+    p[0] = p[2]
+
 def p_NUM(p):
     """
     Fator : NUM
@@ -61,6 +67,6 @@ for linha in sys.stdin:
     parser.success = True
     parser.parse(linha)
     if parser.success:
-        print("Expressão válida!")
+        print("Expressão válida:", linha)
     else:
         print("Não é possivel gerar um resultado pois a expressão é inválida")
