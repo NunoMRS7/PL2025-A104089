@@ -1,4 +1,4 @@
-# TPC6 - Analisador Léxico e Sintático de Expressões Matemáticas
+# TPC6 - Recursivo Descendente para expressões aritméticas
 
 21/03/2025
 
