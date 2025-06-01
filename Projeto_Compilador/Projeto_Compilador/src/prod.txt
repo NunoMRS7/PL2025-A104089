@@ -1,0 +1,139 @@
+Program : PROGRAM id ';' OptionalVarList FunctionList Main
+
+OptionalVarList : VarSection
+                | 
+
+FunctionList : FunctionList FunctionListElem
+             | FunctionListElem
+             | 
+
+FunctionListElem : FUNCTION FuncDefinition ':' id ';' OptionalVarList FunctionBody
+                 | PROCEDURE FuncDefinition ';' OptionalVarList FunctionBody
+
+FuncDefinition : id Parameters
+              
+Parameters : '(' PairList ')'
+           | 
+
+PairList : PairList ';' PairListElem
+         | PairListElem
+         | 
+
+PairListElem : id ':' id
+
+FunctionBody : BEGIN Body OptionalSemiColon END ';'
+
+Main: OptionalVarList MainSection
+
+VarSection : VAR VarsList
+
+VarsList : VarsList VarsListElem
+         | VarsListElem
+
+VarsListElem : VarsListElemIDs ':' VarType ';'
+
+VarType : id
+        | ARRAY ArrayIndexes OF id
+
+ArrayIndexes : '[' num '.' '.' num ']'
+             | 
+
+VarsListElemIDs : VarsListElemIDs ',' id
+                | id
+
+MainSection : BEGIN Body OptionalSemiColon END '.'
+
+Body : Body ';' BodyElem
+     | BodyElem
+
+BodyElem : Factor
+         | Atrib
+         | FORStatement
+         | IFStatement
+         | WHILEStatement
+
+ArgsList : ArgsList ',' Arg
+         | Arg
+         | 
+
+Arg : '(' Arg ')'
+    | Exp
+
+
+FORStatement : FOR Atrib FORTo NumExp DO FORBody
+
+FORTo : TO
+      | DOWNTO
+
+FORBody : BEGIN Body OptionalSemiColon END
+        | BodyElem
+
+IFStatement : IF Condition THEN IFBody ELSE IFBody
+            | IF Condition THEN IFBody
+
+IFBody : BEGIN Body OptionalSemiColon END
+       | BodyElem
+
+WHILEStatement : WHILE Condition DO WHILEBody
+
+WHILEBody : BEGIN Body OptionalSemiColon END
+          | BodyElem
+
+Condition : '(' Condition ')'
+          | LogicExp
+
+Atrib : id SuffixListArray ':' '=' Exp
+
+ComparationSymbol : '>'
+                  | '<'
+                  | '=' 
+                  | '>' '='
+                  | '<' '='
+
+OptionalSemiColon : ';'
+                  | 
+
+Factor : Primary SuffixList
+
+SuffixList : SuffixList Suffix
+           | 
+
+Suffix : '(' ArgsList ')'
+       | '[' Exp ']'
+
+SuffixListArray : '[' Exp ']' SuffixListArray
+                | 
+
+Primary : num
+        | string
+        | boolean
+        | id
+        | '(' Exp ')'
+    
+TermOp : '+'
+       | '-'
+
+FactorOp : '*'
+         | '/'
+         | DIV
+         | MOD
+
+Exp : OrExp
+
+OrExp : OrExp OR AndExp
+      | AndExp
+
+AndExp : AndExp AND RelExp
+       | RelExp
+
+RelExp : AddExp ComparationSymbol AddExp
+       | AddExp
+
+AddExp : AddExp TermOp MulExp
+       | MulExp
+
+MulExp : MulExp FactorOp Unary
+       | Unary
+
+Unary : NOT Unary
+      | Factor

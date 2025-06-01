@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pascal AST Viewer</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .node circle {
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    .node text {
+      font: 10px sans-serif;
+    }
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+    }
+    #tree-container {
+      width: 100%;
+      height: calc(100vh - 200px);
+      border: 1px solid #ccc;
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <form method="post">
+    <textarea name="code" rows="10" cols="80" placeholder="Paste Pascal code here...">{{ request.form.code if request.method=='POST' else '' }}</textarea>
+    <br/>
+    <button type="submit">Show AST</button>
+  </form>
+
+  <div id="tree-container"></div>
+
+  <!-- Load D3 tree rendering logic first -->
+  <script src="{{ url_for('static', filename='tree.js') }}"></script>
+  <!-- Then initialize with data -->
+  <script>
+    // Jinja will render tree_data as a JavaScript object
+    const treeData = {{ tree_data|tojson }};
+    if (treeData) {
+      renderTree(treeData);
+    }
+  </script>
+</body>
+</html>
